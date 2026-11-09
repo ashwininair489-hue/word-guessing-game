@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Word Guessing Game</title>
+  <meta name="description" content="Guess the hidden word one letter at a time before you run out of attempts.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?v={{ asset_version() }}">
+</head>
+<body class="play">
+  <main class="game">
+    <h1 class="title"><span class="title-rocket">🚀</span> Word Guessing Game <span class="title-rocket">🚀</span></h1>
+
+    <section class="word-panel">
+      <div class="word" id="word" data-length="{{ initial_state.word_length }}" aria-live="polite" aria-label="Hidden word">
+        {%- for slot in initial_state.letters -%}
+        <span class="slot{{ ' is-revealed' if slot.revealed else '' }}">{{ slot.char if slot.revealed else '_' }}</span>
+        {%- endfor -%}
+      </div>
+    </section>
+
+    <form class="guess-form" id="guess-form" novalidate autocomplete="off">
+      <input
+        class="guess-input"
+        id="guess-input"
+        name="letter"
+        type="text"
+        inputmode="latin"
+        maxlength="1"
+        autocomplete="off"
+        autocapitalize="characters"
+        spellcheck="false"
+        aria-label="Type one letter"
+        {% if initial_state.status != 'playing' %}disabled hidden{% endif %}>
+      <button class="guess-button" id="guess-button" type="submit" {% if initial_state.status != 'playing' %}disabled{% endif %}>
+        {{- 'Play Again' if initial_state.status != 'playing' else 'Guess Letter' -}}
+      </button>
+    </form>
+
+    <p class="feedback is-{{ initial_state.message_type }}" id="feedback">
+      <span class="feedback-icon" id="feedback-icon">{{ feedback_icon(initial_state.message_type) }}</span>
+      <span class="feedback-text" id="feedback-text">{{ initial_state.message }}</span>
+    </p>
+
+    <p class="meta"><span class="meta-icon">🖤</span> Attempts Left: <b id="attempts-left">{{ initial_state.attempts_left }}</b></p>
+    <p class="meta meta-score"><span class="meta-icon">⭐</span> Score: <b id="score">{{ initial_state.score }}</b></p>
+
+    <div class="details">
+      <span class="chip" id="category-chip">{{ initial_state.category }}</span>
+      <span class="chip" id="letters-chip">{{ initial_state.word_length }} letters</span>
+      <span class="chip chip-wrong" id="wrong-chip"{% if not initial_state.wrong %} hidden{% endif %}>Misses: <b id="wrong-letters">{{ initial_state.wrong | join(' ') }}</b></span>
+    </div>
+
+    <div class="play-footer">
+      <button class="link-button" id="new-game" type="button">Start a new word</button>
+      <span class="dot">·</span>
+      <a class="link-button" href="/">Home</a>
+    </div>
+  </main>
+
+  <script id="initial-state" type="application/json">{{ initial_state | tojson }}</script>
+  <script src="{{ url_for('static', filename='game.js') }}?v={{ asset_version() }}"></script>
+</body>
+</html>

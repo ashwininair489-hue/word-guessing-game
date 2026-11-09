@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Word Guessing Game — one letter at a time</title>
+  <meta name="description" content="A fast, dark-themed word guessing game. Crack the hidden word one letter at a time: 12 attempts, 10 points a letter and a bonus for every heart you save.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?v={{ asset_version() }}">
+</head>
+<body class="landing">
+  <div class="page">
+    <header class="landing-nav">
+      <a class="brand" href="/"><span class="brand-rocket">🚀</span> Word Guessing Game</a>
+      <a class="btn btn-primary btn-sm" href="/play">Play now</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Flask · Python</p>
+          <h1 class="hero-title">
+            One word.<br>
+            Twelve tries.<br>
+            <span class="accent">Twenty-six letters.</span>
+          </h1>
+          <p class="hero-sub">
+            Crack the hidden word one letter at a time. Every correct letter
+            scores, every miss costs a heart — and the answer never leaves the
+            server while you play.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="/play">Start playing <span class="btn-arrow">→</span></a>
+            <a class="btn btn-ghost" href="#how">How it works</a>
+          </div>
+          <p class="hero-meta">No sign-up · 12 attempts per word · Instant rounds</p>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="mock-card">
+            <div class="mock-word">
+              <span class="slot">_</span><span class="slot">_</span><span class="slot">_</span><span class="slot is-revealed">o</span><span class="slot">_</span><span class="slot is-revealed">k</span>
+            </div>
+            <p class="mock-feedback">✅ Correct Guess!</p>
+            <div class="mock-stats">
+              <span>🖤 Attempts Left: <b>11</b></span>
+              <span class="mock-score">⭐ Score: <b>20</b></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how">
+        <div class="section-head">
+          <h2>How it works</h2>
+          <p>Three steps, no tutorial required.</p>
+        </div>
+
+        <div class="card-grid">
+          <article class="card">
+            <span class="card-step">01</span>
+            <h3>A word is picked</h3>
+            <p>Each round draws a word from a category like Animals, Food or Technology, and shows one dash per letter.</p>
+          </article>
+          <article class="card">
+            <span class="card-step">02</span>
+            <h3>You guess a letter</h3>
+            <p>Correct letters flip over and score 10 points each. A wrong letter costs one of your twelve hearts.</p>
+          </article>
+          <article class="card">
+            <span class="card-step">03</span>
+            <h3>You solve it</h3>
+            <p>Finish the word before the hearts run out and bank 5 bonus points for every attempt you have left.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="stat-band">
+        <div class="stat">
+          <span class="stat-value">10</span>
+          <span class="stat-label">points per letter</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">+5</span>
+          <span class="stat-label">per saved heart</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">12</span>
+          <span class="stat-label">attempts per word</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">26</span>
+          <span class="stat-label">letters to choose from</span>
+        </div>
+      </section>
+
+      <section class="cta">
+        <div class="cta-inner">
+          <h2>Think you can crack it?</h2>
+          <p>The word is already picked. Keyboards and guesses are all you need.</p>
+          <a class="btn btn-primary" href="/play">Play a round <span class="btn-arrow">→</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="landing-footer">
+      <span>Built with Flask on Python 3.</span>
+      <a href="/play">Play the game</a>
+    </footer>
+  </div>
+</body>
+</html>

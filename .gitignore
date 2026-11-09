@@ -1,0 +1,10 @@
+*.pyc
+__pycache__/
+.venv/
+venv/
+.vercel/
+*.log
+shots/
+.DS_Store
+cj.txt
+gh-login.log
