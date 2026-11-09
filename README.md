@@ -104,8 +104,8 @@ vercel --prod         # production deployment
    random string (for example `python -c "import secrets; print(secrets.token_hex(32))"`).
 4. Deploy.
 
-Then add `https://<your-project>.vercel.app` as the production URL, and commit
-the change.
+Once the deployment is live, the landing page is at `/` and the game at `/play`.
+Every push to `main` redeploys automatically.
 
 ## Project layout
 
